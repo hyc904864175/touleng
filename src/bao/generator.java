@@ -1,6 +1,8 @@
 package bao;
 
 public class generator {
+	public static final int PAGE_SIZE = 3;
+	// ±àºÅ
 	private String telephone;
 	private String username;
 	private String password;

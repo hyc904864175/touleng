@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "[图片][图片]http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="java.util.List"%>
 <%@page import="bao.generator"%>
-<%@page import="bao.guanli"%>
 <%request.setCharacterEncoding("utf-8");%>
 <html>
+<head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>所有用户信息</title>
 <style type="text/css">
@@ -19,12 +19,34 @@ if (password != '123')
 {alert("密码错误!!");   
 window.opener=null; window.close();} // 密码不正确就关闭//-->
 </script>
+
+<style type="text/css">
+	form{margin: 0px;}
+	td{font-size: 12px;}
+	h2{margin: 2px}
+</style>
+
+<script type="text/javascript">
+	function check(form){
+		with(form){
+			if(telephone.value == ""){
+				alert("请输入更新数量！");
+				return false;
+			}
+			if(isNaN(telephone.value)){
+				alert("格式错误！");
+				return false;
+			}
+			return true;;
+		}
+	}
+</script>
 </head>
 <body>
-	<table align="center" width="450" border="1" height="180" bordercolor="white" bgcolor="black" cellpadding="1" cellspacing="1">
+	<table align="center" width="700" border="1" height="200" bordercolor="white" bgcolor="black" cellpadding="1" cellspacing="1">
 		<tr bgcolor="white">
-			<td align="center" colspan="5">
-				<h2>所有图书信息</h2>
+			<td align="center" colspan="6">
+				<h2>所有用户信息</h2>
 			</td>
 		</tr>
 		<tr align="center" bgcolor="#e1ffc1" >
@@ -32,6 +54,8 @@ window.opener=null; window.close();} // 密码不正确就关闭//-->
 			<td><b>用户名</b></td>
 			<td><b>密码</b></td>
 			<td><b>E-mail</b></td>
+			<td><b>修改手机号</b></td>
+			<td><b>删除</b></td>
 		</tr>
 			<%
 				// 获取图书信息集合
@@ -41,14 +65,25 @@ window.opener=null; window.close();} // 密码不正确就关闭//-->
 						out.print("没有数据！");
 					}else{
 						// 遍历图书集合中的数据
-						for(generator generator1 : list){
+						for(generator generator1: list){
 			%>
-				<tr align="center" bgcolor="white">
+		<tr align="center" bgcolor="white">
 					<td><%=generator1.gettelephone()%></td>
 					<td><%=generator1.getusername()%></td>
 					<td><%=generator1.getpassword()%></td>
 					<td><%=generator1.getemail()%></td>
-				</tr>
+			<td>
+				<form action="UpdateServlet" method="post" onsubmit="return check(this);">
+				<input type="hidden" name="username" value="<%=generator1.getusername()%>"> 
+				<input type="text"  name= "telephone" size="11">
+				<input type="submit" value="修　改">
+				</form>
+			</td>
+			
+			<td>
+				<a href="DeleteServlet?username=<%=generator1.getusername()%>">删除</a>
+			</td>
+		</tr>
 			<%
 					}
 				}
@@ -56,5 +91,3 @@ window.opener=null; window.close();} // 密码不正确就关闭//-->
 	</table>
 </body>
 </html>
-
-
