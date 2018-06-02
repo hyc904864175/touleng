@@ -1,0 +1,19 @@
+body
+{
+   background-color: #FFFFFF;
+   color: #000000;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 13px;
+   line-height: 1.1875;
+   margin: 0;
+   padding: 0;
+}
+#SlideShow1 .image
+{
+   border-width:0;
+   left: 0;
+   top: 0;
+   width: 500px;
+   height: 500px;
+}
